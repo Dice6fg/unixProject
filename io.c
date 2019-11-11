@@ -13,11 +13,21 @@ int main(int argv, char* argv[])
 	int count;
 	int i;
 
-	p0_fifo = open("fifo0", O_RDONLY | O_NONBLOCK);
-	p1_fifo = open("fifo1", O_RDONLY | O_NONBLOCK);
-	p2_fifo = open("fifo2", O_RDONLY | O_NONBLOCK);
-	p3_fifo = open("fifo3", O_RDONLY | O_NONBLOCK);
-	
+	if(atoi(argv[1]) == 0)
+	{
+		p0_fifo = open("fifo0", O_RDONLY | O_NONBLOCK);
+		p1_fifo = open("fifo1", O_RDONLY | O_NONBLOCK);
+		p2_fifo = open("fifo2", O_RDONLY | O_NONBLOCK);
+		p3_fifo = open("fifo3", O_RDONLY | O_NONBLOCK);
+	}
+	else if(atoi(argv[1]) == 1)
+	{
+		p0_fifo = open("fifo4", O_RDONLY | O_NONBLOCK);
+		p1_fifo = open("fifo5", O_RDONLY | O_NONBLOCK);
+		p2_fifo = open("fifo6", O_RDONLY | O_NONBLOCK);
+		p3_fifo = open("fifo7", O_RDONLY | O_NONBLOCK);
+	}
+
 	fd = open("result.txt", O_WRONLY);
 
 	count = 0;

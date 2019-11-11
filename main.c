@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 int main(void)
 {
@@ -10,6 +12,15 @@ int main(void)
 #ifdef TIMES
 	start = dclock();
 #endif
+	
+	mkfifo("fifo0", 0644);	
+	mkfifo("fifo1", 0644);
+	mkfifo("fifo2", 0644);
+	mkfifo("fifo3", 0644);
+	mkfifo("fifo4", 0644);
+	mkfifo("fifo5", 0644);
+	mkfifo("fifo6", 0644);
+	mkfifo("fifo7", 0644);
 
 	switch(pid = fork())
 	{
