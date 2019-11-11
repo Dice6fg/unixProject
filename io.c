@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-int main(int argv, char* argv[])
+int main(int argc, char* argv[])
 {
-	int p0_fifo, p1_fifo1, p2_fifo, p3_fifo;	
+	int p0_fifo, p1_fifo, p2_fifo, p3_fifo;	
 	int fd;	
 
 	int* buf;
@@ -34,7 +34,7 @@ int main(int argv, char* argv[])
 	bufsz = atoi(argv[2])*1000/2;
 	buf = (int*)malloc(bufsz);
 	
-	while(true)
+	while(1)
 	{
 		if(read(p0_fifo, &buf[count], sizeof(int)) > 0)
 			count++; 
