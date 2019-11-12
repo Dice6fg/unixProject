@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 		p3_fifo = open("fifo7", O_RDONLY | O_NONBLOCK);
 	}
 
-	fd = open("result.txt", O_WRONLY);
+	fd = open("result.txt", O_CREAT | O_WRONLY);
 
 	count = 0;
 	bufsz = atoi(argv[2])*1000/2;
