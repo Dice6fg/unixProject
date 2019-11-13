@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 	int i;
 	int zero = 0;
 
-	int b = 0;
+	size_t b = 0;
 
 	count = 0;
 	if(atoi(argv[2]) == 64)
@@ -23,17 +23,16 @@ int main(int argc, char* argv[])
 		bufsz = 32000*sizeof(int);
 
 	buf = (int*)malloc(bufsz);
+	
 
 	if(atoi(argv[1]) == 0)
-	{
+	{	
 		p0_fifo = open("fifo0", O_RDONLY | O_NONBLOCK);
 		p1_fifo = open("fifo1", O_RDONLY | O_NONBLOCK);
 		p2_fifo = open("fifo2", O_RDONLY | O_NONBLOCK);
 		p3_fifo = open("fifo3", O_RDONLY | O_NONBLOCK);
-		fd = open("io0_result.txt", O_CREAT | O_WRONLY | O_TRUNC);
-		for(i=0; i<bufsz/sizeof(int); i++)
-			write(fd, &zero, sizeof(int));
-		lseek(fd, 0, SEEK_SET);
+		fd = open("io0_result.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	//	lseek(fd, 0, SEEK_SET);
 	}
 	else if(atoi(argv[1]) == 1)
 	{
@@ -41,38 +40,38 @@ int main(int argc, char* argv[])
 		p1_fifo = open("fifo5", O_RDONLY | O_NONBLOCK);
 		p2_fifo = open("fifo6", O_RDONLY | O_NONBLOCK);
 		p3_fifo = open("fifo7", O_RDONLY | O_NONBLOCK);
-		fd = open("io1_result.txt", O_CREAT | O_WRONLY | O_TRUNC);
-		for(i=0; i<bufsz/sizeof(int); i++)
-			write(fd, &zero, sizeof(int));
-		lseek(fd, 0, SEEK_SET);
+		fd = open("io1_result.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		//for(i=0; i<8000; i++)
+		//	write(fd, &zero, sizeof(int));
+		//lseek(fd, 0, SEEK_SET);
 	}
 
 
 	
 	while(1)
 	{
-		if(b = read(p0_fifo, &buf[count], sizeof(int)) > 0)
+		if(b = read(p0_fifo, &buf[count], 4) > 0)
 		{ 
 			printf("%d bytes read\n", b);
 			printf("p0_fifo count: %d\n", count);
 			printf("buf[%d]: %d\n", count, buf[count]);
 			count++;
 		}
-		if(b = read(p1_fifo, &buf[count], sizeof(int)) > 0)
+		if(b = read(p1_fifo, &buf[count], 4) > 0)
 		{
 			printf("%d bytes read\n", b);
 			printf("p1_fifo count: %d\n", count);
 			printf("buf[%d]: %d\n", count, buf[count]);
 			count++;
 		}
-		if(b = read(p2_fifo, &buf[count], sizeof(int)) > 0)
+		if(b = read(p2_fifo, &buf[count], 4) > 0)
 		{ 
 			printf("%d bytes read\n", b);
 			printf("p2_fifo count: %d\n", count);
 			printf("buf[%d]: %d\n", count, buf[count]);
 			count++;
 		}
-		if(b = read(p3_fifo, &buf[count], sizeof(int)) > 0)
+		if(b = read(p3_fifo, &buf[count], 4) > 0)
 		{
 			printf("%d bytes read\n", b);
 			printf("p3_fifo count: %d\n", count);
@@ -84,12 +83,14 @@ int main(int argc, char* argv[])
 			break;
 	}
 	printf("buf load finished\n");
+
 	
 	for(i=0; i<bufsz/sizeof(int); i++)
 	{
-		lseek(fd, (buf[i]/10)*sizeof(int), SEEK_SET);
+		lseek(fd, ((buf[i]/10)/2)*sizeof(int), SEEK_SET);
 		write(fd, &buf[i], sizeof(int));
 	}	
+	
 	printf("write finished\n");
 
 	close(p0_fifo);
