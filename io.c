@@ -19,59 +19,78 @@ int main(int argc, char* argv[])
 	count = 0;
 	if(atoi(argv[2]) == 64)
 		bufsz = 8000*sizeof(int);
-	else
+	else if(atoi(argv[2]) == 256)
 		bufsz = 32000*sizeof(int);
 
 	buf = (int*)malloc(bufsz);
 	
 
-	if(atoi(argv[1]) == 0)
-	{	
-		p0_fifo = open("fifo0", O_RDONLY | O_NONBLOCK);
-		p1_fifo = open("fifo1", O_RDONLY | O_NONBLOCK);
-		p2_fifo = open("fifo2", O_RDONLY | O_NONBLOCK);
-		p3_fifo = open("fifo3", O_RDONLY | O_NONBLOCK);
-		fd = open("io0_result.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	//	lseek(fd, 0, SEEK_SET);
-	}
-	else if(atoi(argv[1]) == 1)
-	{
-		p0_fifo = open("fifo4", O_RDONLY | O_NONBLOCK);
-		p1_fifo = open("fifo5", O_RDONLY | O_NONBLOCK);
-		p2_fifo = open("fifo6", O_RDONLY | O_NONBLOCK);
-		p3_fifo = open("fifo7", O_RDONLY | O_NONBLOCK);
-		fd = open("io1_result.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-		//for(i=0; i<8000; i++)
-		//	write(fd, &zero, sizeof(int));
-		//lseek(fd, 0, SEEK_SET);
-	}
 
+	if(atoi(argv[2]) == 64)
+	{
+		if(atoi(argv[1]) == 0)
+		{	
+			p0_fifo = open("fifo0", O_RDONLY | O_NONBLOCK);
+			p1_fifo = open("fifo1", O_RDONLY | O_NONBLOCK);
+			p2_fifo = open("fifo2", O_RDONLY | O_NONBLOCK);
+			p3_fifo = open("fifo3", O_RDONLY | O_NONBLOCK);
+			fd = open("io0_64_result.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		}
+		else if(atoi(argv[1]) == 1)
+		{
+			p0_fifo = open("fifo4", O_RDONLY | O_NONBLOCK);
+			p1_fifo = open("fifo5", O_RDONLY | O_NONBLOCK);
+			p2_fifo = open("fifo6", O_RDONLY | O_NONBLOCK);
+			p3_fifo = open("fifo7", O_RDONLY | O_NONBLOCK);
+			fd = open("io1_64_result.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		}
+	}
+	else if(atoi(argv[2]) == 256)
+	{
+		if(atoi(argv[1]) == 0)
+		{	
+			p0_fifo = open("fifo0", O_RDONLY | O_NONBLOCK);
+			p1_fifo = open("fifo1", O_RDONLY | O_NONBLOCK);
+			p2_fifo = open("fifo2", O_RDONLY | O_NONBLOCK);
+			p3_fifo = open("fifo3", O_RDONLY | O_NONBLOCK);
+			fd = open("io0_256_result.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		}
+		else if(atoi(argv[1]) == 1)
+		{
+			p0_fifo = open("fifo4", O_RDONLY | O_NONBLOCK);
+			p1_fifo = open("fifo5", O_RDONLY | O_NONBLOCK);
+			p2_fifo = open("fifo6", O_RDONLY | O_NONBLOCK);
+			p3_fifo = open("fifo7", O_RDONLY | O_NONBLOCK);
+			fd = open("io1_256_result.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		}
+	}
+	
 
 	
 	while(1)
 	{
-		if(b = read(p0_fifo, &buf[count], 4) > 0)
+		if(b = read(p0_fifo, &buf[count], sizeof(int)) > 0)
 		{ 
 			printf("%d bytes read\n", b);
 			printf("p0_fifo count: %d\n", count);
 			printf("buf[%d]: %d\n", count, buf[count]);
 			count++;
 		}
-		if(b = read(p1_fifo, &buf[count], 4) > 0)
+		if(b = read(p1_fifo, &buf[count], sizeof(int)) > 0)
 		{
 			printf("%d bytes read\n", b);
 			printf("p1_fifo count: %d\n", count);
 			printf("buf[%d]: %d\n", count, buf[count]);
 			count++;
 		}
-		if(b = read(p2_fifo, &buf[count], 4) > 0)
+		if(b = read(p2_fifo, &buf[count], sizeof(int)) > 0)
 		{ 
 			printf("%d bytes read\n", b);
 			printf("p2_fifo count: %d\n", count);
 			printf("buf[%d]: %d\n", count, buf[count]);
 			count++;
 		}
-		if(b = read(p3_fifo, &buf[count], 4) > 0)
+		if(b = read(p3_fifo, &buf[count], sizeof(int)) > 0)
 		{
 			printf("%d bytes read\n", b);
 			printf("p3_fifo count: %d\n", count);
@@ -92,13 +111,14 @@ int main(int argc, char* argv[])
 	}	
 	
 	printf("write finished\n");
-
+	
 	close(p0_fifo);
 	close(p1_fifo);
 	close(p2_fifo);
 	close(p3_fifo);
 	
 	close(fd);
-
+	
+	printf("io: %d,  bufsize: %d\n", atoi(argv[1]), bufsz);
 	return 0;
 }

@@ -79,5 +79,65 @@ int main(void)
 		continue;
 	}
 
+	
+	switch(pid = fork())
+	{
+	case 0:
+		execlp("./p", "p", "0", "256", (char*)NULL);
+		exit(0);
+	default: 
+		break;
+	}
+
+	switch(pid = fork())
+	{
+	case 0:
+		execlp("./p", "p", "1", "256", (char*)NULL);
+		exit(0);
+	default: 
+		break;
+	}
+	
+	switch(pid = fork())
+	{
+	case 0:
+		execlp("./p", "p", "2", "256", (char*)NULL);
+		exit(0);
+	default: 
+		break;
+	}
+
+	switch(pid = fork())
+	{
+	case 0:
+		execlp("./p", "p", "3", "256", (char*)NULL);
+		exit(0);
+	default: 
+		break;
+	}
+
+	switch(pid = fork())
+	{
+	case 0:
+		execlp("./io", "io", "0", "256", (char*)NULL);
+		exit(0);
+	default: 
+		break;
+	}
+
+	switch(pid = fork())
+	{
+	case 0:
+		execlp("./io", "io", "1", "256", (char*)NULL);
+		exit(0);
+	default: 
+		break;
+	}
+	
+	while(wait(&status) != -1)
+	{
+		continue;
+	}
+
 	return 0;
 }
