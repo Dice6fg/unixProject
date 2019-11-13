@@ -9,10 +9,7 @@ int main(void)
 {
 	int pid;
 	int fd;
-	
-#ifdef TIMES
-	start = dclock();
-#endif
+	int status;
 	
 	mkfifo("fifo0", 0644);	
 	mkfifo("fifo1", 0644);
@@ -77,12 +74,10 @@ int main(void)
 		break;
 	}
 	
-	wait(NULL);	
-
-#ifdef TIMES
-	end = dclock()-start;
-	printf(end);
-#endif
+	while(wait(&status) != -1)
+	{
+		continue;
+	}
 
 	return 0;
 }

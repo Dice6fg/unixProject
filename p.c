@@ -11,25 +11,20 @@ int main(int argc, char *argv[])
 {
 
 	int fd, fd1,fd2,fd3,fd4;
-	int *ptr;
 	int i,j;
 	int rfd1[1000];
 	int rfd2[4000];
-	int ptr1[4000];
-	int ptr2[16000];
+	int ptr1[4][1000];
+	int ptr2[8][2000];
 	int io0, io1;
 	char* fifoname;
 	int bufsiz;
-	/*for (i = 0; i < sizeof(int) * 4000; i++)
- * 	{
- * 			write(io0, ptr, sizeof(int));
- * 				}
- *
- * 					close(io0);
- * 						close(io1);*/
-	if (atoi(argv[2]) == 64) {
+
+	int w = 0;
+	
+	if (atoi(argv[2]) == 64) 
+	{
 		bufsiz = 1000;	
-		ptr = (int*)malloc(sizeof(int)*4*bufsiz);
 		fd = open("data1.txt", O_RDONLY);
 		switch (atoi(argv[1]))
 		{
@@ -37,27 +32,32 @@ int main(int argc, char *argv[])
 				fd1 = open("computenode1_64.txt", O_CREAT | O_RDWR | O_TRUNC, 0644);
 				io0 = open("fifo0", O_WRONLY);
 				io1 = open("fifo4", O_WRONLY);
+
 				for (i = 0; i < 4; i++)
 				{
 					lseek(fd, sizeof(int)*bufsiz*2*i, SEEK_SET);
+
 					read(fd, rfd1, sizeof(rfd1));
+
 					for (j = 0; j < bufsiz; j++)
 					{
-						ptr1[j+i*bufsiz] = rfd1[j];
+						ptr1[i][j] = rfd1[j];
 					}
+
 					write(fd1, rfd1, sizeof(rfd1));
-					
 				}
-				for(j=0;j<2;j++){
-					for(i=0;i<bufsiz;i++)
+
+				for(i = 0; i < 4;i++)
+				{
+					for(j = 0; j < bufsiz; j += 2)
 					{
-						write(io0,ptr1,sizeof(int));
-					}	
-					for(i=0;i<bufsiz;i++)
-					{
-						write(io1,ptr1,sizeof(int));
+						w = write(io0, &ptr1[i][j], sizeof(int));
+						printf("%d bytes write to fifo0\n", w);
+						w = write(io1, &ptr1[i][j+1], sizeof(int));
+						printf("%d bytes write to fifo4\n", w);
 					}
 				}
+
 				close(fd1);
 				close(io0);
 				close(io1);
@@ -68,25 +68,27 @@ int main(int argc, char *argv[])
 				io1 = open("fifo5", O_WRONLY);
 				for (i = 0; i < 4; i++)
 				{
-					lseek(fd, sizeof(int)*bufsiz*(2*i+1) , SEEK_SET);
+					lseek(fd, sizeof(int)*bufsiz*((2*i)+1) , SEEK_SET);
 					read(fd, rfd1, sizeof(rfd1));
 					for (j = 0; j < bufsiz; j++)
 					{
-						ptr1[j + i * bufsiz] = rfd1[j];
+						ptr1[i][j] = rfd1[j];
 					}
 					write(fd1, rfd1, sizeof(rfd1));
 					
 				}
-				for(j=0;j<2;j++){
-                                        for(i=0;i<bufsiz;i++)
-                                        {
-                                                write(io0,ptr1,sizeof(int));
-                                        }
-                                        for(i=0;i<bufsiz;i++)
-                                        {
-                                                write(io1,ptr1,sizeof(int));	
-                                        }
-                                }
+
+				for(i=0;i<4;i++)
+				{
+					for(j=0; j<bufsiz; j+=2)
+					{
+						w = write(io0, &ptr1[i][j], sizeof(int));
+						printf("%d bytes write to fifo1\n", w);
+						w = write(io1, &ptr1[i][j+1], sizeof(int));
+						printf("%d bytes write to fifo3\n", w);
+					}
+				}
+
 				close(fd1);
 				close(io0);
 				close(io1); 
@@ -101,20 +103,22 @@ int main(int argc, char *argv[])
 					read(fd, rfd1, sizeof(rfd1));
 					for (j = 0; j < bufsiz; j++)
 					{
-						ptr1[j + i * bufsiz] = rfd1[j];
+						ptr1[i][j] = rfd1[j];
 					}
 					write(fd1, rfd1, sizeof(rfd1));
 
 				}
-				for(j=0;j<2;j++){
-                                        for(i=0;i<bufsiz;i++)
-                                        {
-                                                write(io0,ptr1,sizeof(int));
+				for(i=0;i<4;i++)
+				{
+					for(j=0; j<bufsiz; j+=2)
+					{
+						w = write(io0, &ptr1[i][j], sizeof(int));
+						printf("%d bytes write to fifo2\n", w);
+						w = write(io1, &ptr1[i][j+1], sizeof(int));
+						printf("%d bytes write to fifo6\n", w);
 					}
-                                        {
-                                                write(io1,ptr1,sizeof(int));
-                                        }
-                                }
+				}
+
 				close(fd1);
 				close(io0);
 				close(io1); 
@@ -129,60 +133,63 @@ int main(int argc, char *argv[])
 					read(fd, rfd1, sizeof(rfd1));
 					for (j = 0; j < bufsiz; j++)
 					{
-						ptr1[j + i * bufsiz] = rfd1[j];
+						ptr1[i][j] = rfd1[j];
 					}
 					write(fd1, rfd1, sizeof(rfd1));
 
 				}
-				for(j=0;j<2;j++){
-                                        for(i=0;i<bufsiz;i++)
-                                        {
-                                                write(io0,ptr1,sizeof(int));
-                                        }
-                                        for(i=0;i<bufsiz;i++)
-                                        {
-                                                write(io1,ptr1,sizeof(int));
-                                        }
-                                }
+
+				for(i=0;i<4;i++)
+				{
+					for(j=0; j<bufsiz; j+=2)
+					{
+						w = write(io0, &ptr1[i][j], sizeof(int));
+						printf("%d bytes write to fifo3\n", w);
+						w = write(io1, &ptr1[i][j+1], sizeof(int));
+						printf("%d bytes write to fifo7\n", w);
+					}
+				}
+
 				close(fd1);
 				close(io0);
 				close(io1);
 				break;
+
 			default: break;
 		}
 		close(fd);
 	}
-	
-	else if(atoi(argv[2]) == 256) {
-		bufsiz = 4000;
+	else if(atoi(argv[2]) == 256) 
+	{
+		bufsiz = 4000;		
 		fd = open("data2.txt", O_RDONLY);
+
 		switch (atoi(argv[1]))
 		{
 		case 0:
 			io0 = open("fifo0", O_WRONLY);
 			io1 = open("fifo4", O_WRONLY);
-			fd1 = open("computenode1_256.txt", O_CREAT | O_RDWR | O_TRUNC, 0644);
+			fd1 = open("computenode1_256.txt", O_CREAT | O_WRONLY | O_TRUNC, 0644);
 			for (i = 0; i < 4; i++)
 			{
 				lseek(fd, sizeof(int) * bufsiz * 2 * i, SEEK_SET);
 				read(fd, rfd2, sizeof(rfd2));
 				for (j = 0; j < bufsiz; j++)
 				{
-					ptr2[j + i * bufsiz] = rfd2[j];
+					ptr2[i][j] = rfd2[j];
 				}
 				write(fd1, rfd2, sizeof(rfd2));
-
+			
 			}
-			for(j=0;j<2;j++){
-                             for(i=0;i<bufsiz;i++)
-                             {
-				write(io0,ptr2,sizeof(int));
-                             }
-			     for(i=0;i<bufsiz;i++)
-			     {
-				write(io1,ptr2,sizeof(int));
-                             }
-                       }
+			for(i=0;i<8;i++)
+			{
+				for(j=0; j<bufsiz; j+=2)
+				{
+					write(io0, &ptr2[i][j], sizeof(int));
+					write(io1, &ptr2[i][j+1], sizeof(int));
+				}
+			}
+                       
                 	close(fd1);
 			close(io0);
 			close(io1);
@@ -197,21 +204,21 @@ int main(int argc, char *argv[])
 				read(fd, rfd2, sizeof(rfd2));
 				for (j = 0; j < bufsiz; j++)
 				{
-					ptr2[j + i * bufsiz] = rfd2[j];
+					ptr2[i][j] = rfd2[j];
 				}
 				write(fd1, rfd2, sizeof(rfd2));
 
 			}
-				for(j=0;j<2;j++){
-					for(i=0;i<bufsiz;i++)
-					{
-						write(io0,ptr2,sizeof(int));
-					}	
-					for(i=0;i<bufsiz;i++)
-					{
-						write(io1,ptr2,sizeof(int));
-					}
+
+			for(i=0;i<8;i++)
+			{
+				for(j=0; j<bufsiz; j+=2)
+				{
+					write(io0, &ptr2[i][j], sizeof(int));
+					write(io1, &ptr2[i][j+1], sizeof(int));
 				}
+			}
+			
 			close(fd1);
 			close(io0);
 			close(io1);
@@ -226,21 +233,21 @@ int main(int argc, char *argv[])
 				read(fd, rfd2, sizeof(rfd2));
 				for (j = 0; j < bufsiz; j++)
 				{
-					ptr2[j + i * bufsiz] = rfd2[j];
+					ptr2[i][j] = rfd2[j];
 				}
 				write(fd1, rfd2, sizeof(rfd2));
 
 			}
-				for(j=0;j<2;j++){
-					for(i=0;i<bufsiz;i++)
-					{
-						write(io0,ptr2,sizeof(int));
-					}	
-					for(i=0;i<bufsiz;i++)
-					{
-						write(io1,ptr2,sizeof(int));
-					}
+			
+			for(i=0;i<8;i++)
+			{
+				for(j=0; j<bufsiz; j+=2)
+				{
+					write(io0, &ptr2[i][j], sizeof(int));
+					write(io1, &ptr2[i][j+1], sizeof(int));
 				}
+			}
+			
 			close(fd1);
 			close(io0);
 			close(io1);
@@ -255,21 +262,21 @@ int main(int argc, char *argv[])
 				read(fd, rfd2, sizeof(rfd2));
 				for (j = 0; j < bufsiz; j++)
 				{
-					ptr2[j + i * bufsiz] = rfd2[j];
+					ptr2[i][j] = rfd2[j];
 				}
 				write(fd1, rfd2, sizeof(rfd2));
 
 			}
-			for(j=0;j<2;j++){
-				for(i=0;i<bufsiz;i++)
+
+			for(i=0;i<8;i++)
+			{
+				for(j=0; j<bufsiz; j+=2)
 				{
-					write(io0,ptr2,sizeof(int));
-				}	
-				for(i=0;i<bufsiz;i++)
-				{
-					write(io1,ptr2,sizeof(int));
+					write(io0, &ptr2[i][j], sizeof(int));
+					write(io1, &ptr2[i][j+1], sizeof(int));
 				}
 			}
+
 			close(fd1);
 			close(io0);
 			close(io1);
