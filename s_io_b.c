@@ -138,8 +138,6 @@ int main(int argc, char* argv[])
 		{
 			b = 0;
 			offset = (temp[0]/10 - atoi(argv[1])*1000)/2;	
-	if(atoi(argv[1]) == 1)
-			printf("io%d data: %d, offset: %d from p0\n", atoi(argv[1]), temp[0], offset);
 			if(offset >= 0)
 				memcpy(&buf[offset], temp, sizeof(int)*1000);
 			count++;
@@ -150,8 +148,6 @@ int main(int argc, char* argv[])
 		{
 			b = 0;
 			offset = (temp[0]/10 - atoi(argv[1])*1000)/2;	
-	if(atoi(argv[1]) == 1)
-			printf("io%d data: %d, offset: %d from p1\n", atoi(argv[1]), temp[0], offset);
 			if(offset >= 0)
 			memcpy(&buf[offset], temp, sizeof(int)*1000);
 			count++;
@@ -162,8 +158,6 @@ int main(int argc, char* argv[])
 		{
 			b = 0;
 			offset = (temp[0]/10 - atoi(argv[1])*1000)/2;	
-	if(atoi(argv[1]) == 1)
-			printf("io%d data: %d, offset: %d from p2\n", atoi(argv[1]), temp[0], offset);
 			if(offset >= 0)
 			memcpy(&buf[offset], temp, sizeof(int)*1000);
 			count++;
@@ -174,8 +168,6 @@ int main(int argc, char* argv[])
 		{
 			b = 0;
 			offset = (temp[0]/10 - atoi(argv[1])*1000)/2;	
-	if(atoi(argv[1]) == 1)
-			printf("io%d data: %d, offset: %d from p3\n", atoi(argv[1]), temp[0], offset);
 			if(offset >= 0)
 			memcpy(&buf[offset], temp, sizeof(int)*1000);
 			count++;

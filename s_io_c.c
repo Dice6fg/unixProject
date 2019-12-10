@@ -150,7 +150,7 @@ int main(int argc, char* argv[])
 				buf[offset] = temp[i];
 			}
 			c0++;
-			printf("io%d read data: %d offset: %d from p0\n", atoi(argv[1]), temp[0], offset);
+		//	printf("io%d read data: %d offset: %d from p0\n", atoi(argv[1]), temp[0], offset);
 		}
 		
 		b = read(data1, temp, sizeof(int)*250);
@@ -165,7 +165,7 @@ int main(int argc, char* argv[])
 				buf[offset] = temp[i];
 			}
 			c1++;
-			printf("io%d read data: %d offset: %d from p1\n", atoi(argv[1]), temp[249], offset);
+		//	printf("io%d read data: %d offset: %d from p1\n", atoi(argv[1]), temp[249], offset);
 		}
 		
 
@@ -181,7 +181,7 @@ int main(int argc, char* argv[])
 				buf[offset] = temp[i];
 			}
 			c2++;
-			printf("io%d read data: %d offset: %d from p2\n", atoi(argv[1]), temp[249], offset);
+		//	printf("io%d read data: %d offset: %d from p2\n", atoi(argv[1]), temp[249], offset);
 		}
 			
 
@@ -197,11 +197,11 @@ int main(int argc, char* argv[])
 				buf[offset] = temp[i];
 			}
 			c3++;
-			printf("io%d read data: %d offset: %d from p3\n", atoi(argv[1]), temp[249], offset);
+		//	printf("io%d read data: %d offset: %d from p3\n", atoi(argv[1]), temp[249], offset);
 		}	
 
 
-		printf("io%d read data c1: %d, c2: %d, c3: %d, c4: %d\n", atoi(argv[1]), c0, c1,c2, c3);
+		//printf("io%d read data c1: %d, c2: %d, c3: %d, c4: %d\n", atoi(argv[1]), c0, c1,c2, c3);
 		if(c0 >= v && c1 >= v && c2 >= v && c3 >= v)
 				break;
 	}

@@ -81,11 +81,11 @@ int main(int argc, char *argv[])
 					{
 						if(ptr1[t1][i] >= cmdbuf0[t2] && ptr1[t1][i+249] < cmdbuf0[t2+1])
 						{
-							printf("p0 write to io0 %d\n", ptr1[t1][i]);
+						//	printf("p0 write to io0 %d\n", ptr1[t1][i]);
 							write(io0, &ptr1[t1][i], sizeof(int)*250);
 						}
 						if(ptr1[t1][i] >= cmdbuf1[t2] && ptr1[t1][i+249] < cmdbuf1[t2+1]){	
-							printf("p0 write to io1 %d\n", ptr1[t1][i]);	
+						//	printf("p0 write to io1 %d\n", ptr1[t1][i]);	
 							write(io1, &ptr1[t1][i], sizeof(int)*250);
 						}
 					}
@@ -150,11 +150,11 @@ int main(int argc, char *argv[])
 					for(i=0; i<bufsiz; i+=250)
 					{
 						if(ptr1[t1][i] >= cmdbuf0[t2] && ptr1[t1][i+249] < cmdbuf0[t2+1]){
-							printf("p1 write to io0 %d\n", ptr1[t1][i]);
+						//	printf("p1 write to io0 %d\n", ptr1[t1][i]);
 							write(io0, &ptr1[t1][i], sizeof(int)*250);
 						}
 						if(ptr1[t1][i] >= cmdbuf1[t2] && ptr1[t1][i+249] < cmdbuf1[t2+1]){
-							printf("p1 write to io1 %d\n", ptr1[t1][i]);
+						//	printf("p1 write to io1 %d\n", ptr1[t1][i]);
 							write(io1, &ptr1[t1][i], sizeof(int)*250);
 						}
 					}
@@ -220,11 +220,11 @@ int main(int argc, char *argv[])
 					for(i=0; i<bufsiz; i+=250)
 					{
 						if(ptr1[t1][i] >= cmdbuf0[t2] && ptr1[t1][i+249] < cmdbuf0[t2+1]){
-							printf("p2 write to io0 %d\n", ptr1[t1][i]);
+						//	printf("p2 write to io0 %d\n", ptr1[t1][i]);
 							write(io0, &ptr1[t1][i], sizeof(int)*250);
 						}
 						if(ptr1[t1][i] >= cmdbuf1[t2] && ptr1[t1][i+249] < cmdbuf1[t2+1]){
-							printf("p2 write to io1 %d\n", ptr1[t1][i]);
+						//	printf("p2 write to io1 %d\n", ptr1[t1][i]);
 							write(io1, &ptr1[t1][i], sizeof(int)*250);
 						}
 					}
@@ -289,11 +289,11 @@ int main(int argc, char *argv[])
 					for(i=0; i<bufsiz; i+=250)
 					{
 						if(ptr1[t1][i] >= cmdbuf0[t2] && ptr1[t1][i+249] < cmdbuf0[t2+1]){
-							printf("p3 write to io0 %d\n", ptr1[t1][i]);
+						//	printf("p3 write to io0 %d\n", ptr1[t1][i]);
 							write(io0, &ptr1[t1][i], sizeof(int)*250);
 						}
 						if(ptr1[t1][i] >= cmdbuf1[t2] && ptr1[t1][i+249] < cmdbuf1[t2+1]){
-							printf("p3 write to io1 %d\n", ptr1[t1][i]);
+						//	printf("p3 write to io1 %d\n", ptr1[t1][i]);
 							write(io1, &ptr1[t1][i], sizeof(int)*250);
 						}
 					}
@@ -371,11 +371,11 @@ int main(int argc, char *argv[])
 					for(i=0; i<bufsiz; i+=250)
 					{
 						if(ptr1[t1][i] >= cmdbuf0[t2] && ptr1[t1][i+249] < cmdbuf0[t2+1]){
-							printf("p0 write to io0 %d\n", ptr1[t1][i]);
+						//	printf("p0 write to io0 %d\n", ptr1[t1][i]);
 							write(io0, &ptr1[t1][i], sizeof(int)*250);
 						}
 						if(ptr1[t1][i] >= cmdbuf1[t2] && ptr1[t1][i+249] < cmdbuf1[t2+1]){
-							printf("p0 write to io1 %d\n", ptr1[t1][i]);
+						//	printf("p0 write to io1 %d\n", ptr1[t1][i]);
 							write(io1, &ptr1[t1][i], sizeof(int)*250);
 						}
 					}
@@ -441,11 +441,11 @@ int main(int argc, char *argv[])
 					for(i=0; i<bufsiz; i+=250)
 					{
 						if(ptr1[t1][i] >= cmdbuf0[t2] && ptr1[t1][i+249] < cmdbuf0[t2+1]){
-							printf("p1 write to io0 %d\n", ptr1[t1][i]);
+						//	printf("p1 write to io0 %d\n", ptr1[t1][i]);
 							write(io0, &ptr1[t1][i], sizeof(int)*250);
 						}
 						if(ptr1[t1][i] >= cmdbuf1[t2] && ptr1[t1][i+249] < cmdbuf1[t2+1]){
-							printf("p1 write to io1 %d\n", ptr1[t1][i]);
+						//	printf("p1 write to io1 %d\n", ptr1[t1][i]);
 							write(io1, &ptr1[t1][i], sizeof(int)*250);
 						}
 					}
@@ -511,11 +511,11 @@ int main(int argc, char *argv[])
 					for(i=0; i<bufsiz; i+=250)
 					{
 						if(ptr1[t1][i] >= cmdbuf0[t2] && ptr1[t1][i+249] < cmdbuf0[t2+1]){
-							printf("p2 write to io0 %d\n", ptr1[t1][i]);
+						//	printf("p2 write to io0 %d\n", ptr1[t1][i]);
 							write(io0, &ptr1[t1][i], sizeof(int)*250);
 						}
 						if(ptr1[t1][i] >= cmdbuf1[t2] && ptr1[t1][i+249] < cmdbuf1[t2+1]){
-							printf("p2 write to io1 %d\n", ptr1[t1][i]);
+						//	printf("p2 write to io1 %d\n", ptr1[t1][i]);
 							write(io1, &ptr1[t1][i], sizeof(int)*250);
 						}
 					}
@@ -581,11 +581,11 @@ int main(int argc, char *argv[])
 					for(i=0; i<bufsiz; i+=250)
 					{
 						if(ptr1[t1][i] >= cmdbuf0[t2] && ptr1[t1][i+249] < cmdbuf0[t2+1]){
-							printf("p3 write to io0 %d\n", ptr1[t1][i]);
+						//	printf("p3 write to io0 %d\n", ptr1[t1][i]);
 							write(io0, &ptr1[t1][i], sizeof(int)*250);
 						}
 						if(ptr1[t1][i] >= cmdbuf1[t2] && ptr1[t1][i+249] < cmdbuf1[t2+1]){
-							printf("p3 write to io1 %d\n", ptr1[t1][i]);
+						//	printf("p3 write to io1 %d\n", ptr1[t1][i]);
 							write(io1, &ptr1[t1][i], sizeof(int)*250);
 						}
 					}

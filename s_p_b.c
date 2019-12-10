@@ -323,7 +323,7 @@ int main(int argc, char *argv[])
 				io0 = open("datap0io0", O_RDWR);
 				io1 = open("datap0io1", O_RDWR);
 								
-				for (i = 0; i < 16; i++)
+				for (i = 0; i < 16; i+=2)
 				{
 					lseek(fd, sizeof(int)*bufsiz*2*i, SEEK_SET);
 
@@ -335,6 +335,14 @@ int main(int argc, char *argv[])
 					}
 
 					write(fd1, rfd1, sizeof(rfd1));
+					read(fd, rfd1, sizeof(rfd1));
+
+					for(j=0; j< bufsiz; j++)
+					{
+						ptr2[i+1][j] = rfd1[j];
+					}
+					write(fd1, rfd1, sizeof(rfd1));
+					
 				}
 				
 				//read cmd
@@ -390,9 +398,9 @@ int main(int argc, char *argv[])
 				io0 = open("datap1io0", O_RDWR);
 				io1 = open("datap1io1", O_RDWR);
 								
-				for (i = 0; i < 16; i++)
+				for (i = 0; i < 16; i+=2)
 				{
-					lseek(fd, sizeof(int)*bufsiz*(2*i + 1), SEEK_SET);
+					lseek(fd, sizeof(int)*bufsiz*(2*i + 2), SEEK_SET);
 
 					read(fd, rfd1, sizeof(rfd1));
 
@@ -401,6 +409,14 @@ int main(int argc, char *argv[])
 						ptr2[i][j] = rfd1[j];
 					}
 
+					write(fd1, rfd1, sizeof(rfd1));
+					read(fd, rfd1, sizeof(rfd1));
+			
+					for(j=0; j< bufsiz; j++)
+					{
+						ptr2[i+1][j] = rfd1[j];
+					}
+					
 					write(fd1, rfd1, sizeof(rfd1));
 				}
 				
@@ -457,7 +473,7 @@ int main(int argc, char *argv[])
 				io0 = open("datap2io0", O_RDWR);
 				io1 = open("datap2io1", O_RDWR);
 								
-				for (i = 0; i < 16; i++)
+				for (i = 0; i < 16; i+=2)
 				{
 					lseek(fd, sizeof(int)*bufsiz*(2*i + 32), SEEK_SET);
 
@@ -468,6 +484,15 @@ int main(int argc, char *argv[])
 						ptr2[i][j] = rfd1[j];
 					}
 
+					write(fd1, rfd1, sizeof(rfd1));
+				
+					read(fd, rfd1, sizeof(rfd1));
+					
+					for(j=0; j<bufsiz; j++)
+					{
+						ptr2[i+1][j] = rfd1[j];
+					}
+					
 					write(fd1, rfd1, sizeof(rfd1));
 				}
 				
@@ -498,7 +523,7 @@ int main(int argc, char *argv[])
 					}
 					if(ptr2[t1][0] >= cmdbuf1[t2] && ptr2[t1][999] < cmdbuf1[t2+1]){
 						write(io1, ptr2[t1], sizeof(int)*1000);
-						printf("p2 send data to io1 %d\n", ptr2[t1][0]);
+					//	printf("p2 send data to io1 %d\n", ptr2[t1][0]);
 					}
 
 					t2+=2;
@@ -524,9 +549,9 @@ int main(int argc, char *argv[])
 				io0 = open("datap3io0", O_RDWR);
 				io1 = open("datap3io1", O_RDWR);
 								
-				for (i = 0; i < 16; i++)
+				for (i = 0; i < 16; i+=2)
 				{
-					lseek(fd, sizeof(int)*bufsiz*(2*i + 33), SEEK_SET);
+					lseek(fd, sizeof(int)*bufsiz*(2*i + 34), SEEK_SET);
 
 					read(fd, rfd1, sizeof(rfd1));
 
@@ -536,6 +561,15 @@ int main(int argc, char *argv[])
 					}
 
 					write(fd1, rfd1, sizeof(rfd1));
+					read(fd, rfd1, sizeof(rfd1));
+
+					for (j = 0; j < bufsiz; j++)
+					{
+						ptr2[i+1][j] = rfd1[j];
+					}
+					write(fd1, rfd1, sizeof(rfd1));
+
+			
 				}
 				
 				//read cmd
@@ -565,7 +599,7 @@ int main(int argc, char *argv[])
 					}
 					if(ptr2[t1][0] >= cmdbuf1[t2] && ptr2[t1][999] < cmdbuf1[t2+1]){
 						write(io1, ptr2[t1], sizeof(int)*1000);
-						printf("p3 send data to io1 %d\n", ptr2[t1][0]);
+					//	printf("p3 send data to io1 %d\n", ptr2[t1][0]);
 					}
 
 					t2+=2;
