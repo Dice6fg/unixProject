@@ -4,12 +4,16 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <sys/time.h>
 
 int main(void)
 {
 	int pid;
 	int fd;
 	int status;
+	struct timeval start,end;
+	double time;
+
 	
 	mkfifo("fifo0", 0644);	
 	mkfifo("fifo1", 0644);
@@ -19,7 +23,9 @@ int main(void)
 	mkfifo("fifo5", 0644);
 	mkfifo("fifo6", 0644);
 	mkfifo("fifo7", 0644);
-
+	
+	gettimeofday(&start,NULL);
+	
 	switch(pid = fork())
 	{
 	case 0:
@@ -73,13 +79,19 @@ int main(void)
 	default: 
 		break;
 	}
+	gettimeofday(&end,NULL);
+		
+	time = ( end.tv_sec - start.tv_sec )*1000000 + (( end.tv_usec - start.tv_usec ));
 	
+	printf("64 kB time is : %lf\n", time);
+
 	while(wait(&status) != -1)
 	{
 		continue;
 	}
 
 	
+	gettimeofday(&start,NULL);
 	switch(pid = fork())
 	{
 	case 0:
@@ -134,6 +146,12 @@ int main(void)
 		break;
 	}
 	
+	gettimeofday(&end,NULL);
+		
+	time = ( end.tv_sec - start.tv_sec )*1000000 + (( end.tv_usec - start.tv_usec ));
+	
+	printf("256KB time is : %lf\n", time);
+
 	while(wait(&status) != -1)
 	{
 		continue;

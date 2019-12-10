@@ -103,7 +103,6 @@ int main(int argc, char* argv[])
 		if(count == bufsz/sizeof(int))
 			break;
 	}
-	printf("buf load finished\n");
 
 	if(atoi(argv[2]) ==64){
 		if(atoi(argv[1]) == 0){
@@ -164,7 +163,6 @@ int main(int argc, char* argv[])
 	
 	}
 	
-	printf("write finished\n");
 	
 	close(p0_fifo);
 	close(p1_fifo);
@@ -173,7 +171,6 @@ int main(int argc, char* argv[])
 	
 	close(fd);
 	
-	printf("io: %d,  bufsize: %d\n", atoi(argv[1]), bufsz);
 	return 0;
 }
 
